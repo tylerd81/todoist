@@ -1,38 +1,33 @@
 import React, { Component } from "react";
-import TaskList from "./TaskList";
+import TaskInput from "./components/TaskInput";
+
+import TaskList from "./components/TaskList";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      taskList: []
-    };
-  }
+  state = {
+    taskList: [{title: "Get this thing working!", completed: false, timeSpent: 1200}],
+  };
 
-  componentDidMount() {
-    fetch("http://localhost:8000/tasks")
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          return null;
-        }
-      })
-      .then(jsonData => {
-        if (jsonData != null) {
-          this.setState({ taskList: jsonData });
-        }
-      });
+  addTask= (task) => {
+    let tl = [...this.state.taskList, task];
+    this.setState({taskList: tl});
   }
 
   render() {
+
+    const {taskList} = this.state;    
+
     return (
-      <div className="App">
-        <h1>Task List</h1>
-        <TaskList taskList={this.state.taskList} />
+      <div id="main-container">
+        <h1>Task Manager</h1>
+        <TaskInput addTask={this.addTask} />
+
+        <TaskList taskList={taskList} />
+        
       </div>
-    );
+    )
   }
 }
+
 
 export default App;

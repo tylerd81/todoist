@@ -6,11 +6,23 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  background-color: #c7c7c7;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+#main-container {
+  width: 75vw;
+  margin: 0 auto;
+}
+
+#new-task-container {
+  display: flex;
+  width: 75vw;
 }
 
 .task-list {
@@ -20,8 +32,9 @@ code {
 
 .task-item {
   border: solid 3px #000;
-  border-radius: 25px;
+  border-radius: 15px;
   margin: 1rem;
+  background-color: white;
 }
 
 .task-item-header {
@@ -30,10 +43,143 @@ code {
 }
 
 .task-item-container {
+  display: flex;
   margin-top: 0;
   padding: 1rem;
 }
 
-.task-item-container h3 {
+.task-item-details {
+  flex: 2;
+}
+
+.timer-container {
+  flex: 3;  
+}
+
+/* container for the actual timer */
+.task-timer {
+  font-size: 3rem;
+  /* border: solid 3px #000; */
+  text-align: center;
+}
+
+.task-timer h3 {
+  margin: 0;
+}
+.timer-controls {
+  /* border: solid 1px #000; */
+  padding: 0;
+}
+
+.add-task-button {
+  flex: 1;
+  height: 2.5rem;
+  background-color: #00F;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: "Roboto";
+  font-size: 1.5rem;
+  box-shadow: 1px 1px 1px #000;
+  outline: none;
+}
+.add-task-button:active {
+  box-shadow: none;
+}
+
+.task-title-input {  
+  flex: 5;
+  margin-left: 1rem;;
+  font-family: "Roboto";
+  font-size: 1.5rem;
   
+}
+
+
+
+.finished-icon {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.red-check { 
+  color: #f00;
+  
+}
+
+.green-check {
+  color: #0A0;
+
+}
+
+/* .work-on-task-button {
+  height: 2.5rem;
+  background-color: #0A0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: "Roboto";
+  font-size: 1.5rem;
+  box-shadow: 1px 1px 1px #000;
+  outline: none;
+}
+.work-on-task-button:active {
+  box-shadow: none;  
+}
+.button-disabled {
+  background-color: #e9e8e8;
+  color: #c7c7c7;
+  box-shadow: 1px 1px 1px #eee;;
+} */
+
+.start-pause-button {
+  height: 2.5rem;
+  background-color: #0C0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: "Roboto";
+  font-size: 1.5rem;
+  box-shadow: 1px 1px 1px #000;
+  outline: none;
+  margin-right: 1rem;
+  padding: 0 1rem;
+}
+.start-pause-button:active {
+  box-shadow: none;  
+}
+
+.log-button {
+  width: 100%;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  font-family: "Roboto";
+  background-color: #3a3ac9;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: "Roboto";
+  font-size: 1.5rem;
+  box-shadow: 1px 1px 1px #000;
+  outline: none;
+}
+.log-button:active {
+  box-shadow: none;  
+}
+
+.switch-timer-button { 
+  height: 2.5rem;
+  font-size: 1.5rem;
+  font-family: "Roboto";
+  background-color: #3a3ac9;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: "Roboto";
+  font-size: 1.5rem;
+  box-shadow: 1px 1px 1px #000;
+  outline: none;
+  margin-right: 1rem;
+}
+.log-button:active {
+  box-shadow: none;  
 }
