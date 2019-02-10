@@ -29,6 +29,13 @@ export default class StopWatch extends Component {
     this.setState({currentTime: currentTime + 1});
   }
 
+  buildStopwatchDisplay = ({hours, minutes, seconds}) => {
+    return (
+      <div className="timer-display">
+        <h3>{hours}:{minutes}:{seconds}</h3>
+      </div>
+    );
+  }
 
   render() {
     //press start  - get the current time
@@ -40,7 +47,8 @@ export default class StopWatch extends Component {
     return (
       <div className="task-timer">
         {/* <h3>{currentTime}</h3> */}
-        <TimeDisplay currentTime={currentTime} />
+        {/* <TimeDisplay currentTime={currentTime} editable={true} /> */}
+        {this.buildStopwatchDisplay(convertSecondsToTimeObject(currentTime))}
         <div className="timer-controls">
           {!this.state.timerRunning ?
           <div className="timer-control-container">

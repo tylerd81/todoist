@@ -5,12 +5,14 @@ export default class TimeDisplay extends Component {
 
   render() {
     const {currentTime} = this.props;
-    const timeObj = convertSecondsToTimeObject(currentTime);
+    const {hours, minutes, seconds} = convertSecondsToTimeObject(currentTime);
+    let disabled = !this.props.editable;
 
-    const timeString = `${timeObj.hours}:${timeObj.minutes}:${timeObj.seconds}`;
     return (
       <div className="timer-display">
-        <h3>{timeString}</h3>
+        <input disabled={disabled} className="timer-input" type="text" value={hours} />:
+        <input disabled={disabled} className="timer-input" type="text" value={minutes} />:
+        <input disabled={disabled} className="timer-input" type="text" value={seconds} />
       </div>
     );
   }

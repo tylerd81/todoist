@@ -71,6 +71,17 @@ code {
   padding: 0;
 }
 
+/* inputs for the hours, minutes, seconds */
+.timer-input {
+  width: 4.5rem;
+  font-size: 4rem;
+  font-weight: bold;
+  border: none;
+}
+.timer-input[disabled] {
+  background-color: white;
+  color: black;
+}
 .add-task-button {
   flex: 1;
   height: 2.5rem;

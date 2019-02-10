@@ -25,7 +25,7 @@ function convertSecondsToTimeString(seconds) {
 
 export default class TaskItem extends Component {
   state = {
-    folded: true,
+    folded: false,
     stopWatchDisplayed: false,
     timerDisplayed: true,
   };
@@ -70,7 +70,7 @@ export default class TaskItem extends Component {
             <div className="timer-container">
               { this.state.stopWatchDisplayed ? 
                 <StopWatch stopwatchDone={this.updateTime} /> :
-                <CountdownTimer hours={1} minutes={20} seconds={0} />
+                <CountdownTimer countdownDone={this.updateTime} />
               } 
 
             </div>
