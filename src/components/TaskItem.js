@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import FinishedIcon from "./FinishedIcon";
 import StopWatch from "./StopWatch";
 import Timer from "./Timer";
+import CountdownTimer from "./CountdownTimer";
 
 function convertSecondsToTimeString(seconds) { 
   if(seconds === 0) {
@@ -69,8 +70,8 @@ export default class TaskItem extends Component {
             <div className="timer-container">
               { this.state.stopWatchDisplayed ? 
                 <StopWatch stopwatchDone={this.updateTime} /> :
-                <Timer />
-              }
+                <CountdownTimer hours={1} minutes={20} seconds={0} />
+              } 
 
             </div>
           </div>

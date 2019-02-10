@@ -1,50 +1,7 @@
 import React, { Component } from 'react';
 
-function convertSecondsToTimeString(seconds) {
-  if(seconds === 0) {
-    return "00h 00m 00s";
-  }
-
-  let minutes = Math.floor(seconds / 60);
-  seconds %= 60;
-
-  let hours = Math.floor(minutes / 60);
-  minutes %= 60;
-
-  let s = "";
-
-  if(hours !== 0) {
-    if(hours < 10) {
-      s += `0${hours}h `;
-    }else{
-      s += `${hours}h `;
-    }
-  }else{
-    s+= "00h ";
-  }
-
-  if(minutes !== 0) {
-    if(minutes < 10) {
-      s += `0${minutes}m `;
-    }else{
-      s += `${minutes}m `;
-    }
-  }else{
-    s+= `00m `
-  }
-
-  if(seconds !== 0) {
-    if(seconds < 10) {
-      s += `0${seconds}s`
-    }else{
-      s += `${seconds}s`;
-    }
-  }else {
-    s += `00s`;
-  }
-
-  return s;
-}
+import {convertSecondsToTimeObject} from "../util/convert";
+import TimeDisplay from "./TimeDisplay";
 
 export default class StopWatch extends Component {
   state = {
@@ -78,11 +35,12 @@ export default class StopWatch extends Component {
     //tick every second 
     // (Date.now() - startTime) / 1000 = number of seconds
     let {startingValue} = this.props;
-    let currentTime = convertSecondsToTimeString(this.state.currentTime);
+    let {currentTime} = this.state;
 
     return (
       <div className="task-timer">
-        <h3>{currentTime}</h3>
+        {/* <h3>{currentTime}</h3> */}
+        <TimeDisplay currentTime={currentTime} />
         <div className="timer-controls">
           {!this.state.timerRunning ?
           <div className="timer-control-container">
