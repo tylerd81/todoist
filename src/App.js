@@ -5,7 +5,7 @@ import TaskList from "./components/TaskList";
 
 class App extends Component {
   state = {
-    taskList: [{title: "Get this thing working!", completed: false, timeSpent: 1200}],
+    taskList: [],
   };
 
   addTask= (task) => {

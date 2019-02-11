@@ -115,7 +115,7 @@ export default class CountdownTimer extends Component {
           className="timer-input"
           type="text"
           value={this.state.hours}
-          onInput={this.timerChange}
+          onChange={this.timerChange}
           onFocus={this.inputClicked}
           onBlur={this.inputLost}
           
@@ -147,14 +147,17 @@ export default class CountdownTimer extends Component {
   };
 
   logButtonPressed = () => {
-    let {countdownDone} = this.props;
+    let {countdownDone} = this.props;    
     countdownDone(this.numSecondsToLog);
+    this.numSecondsToLog = 0;
   }
   render() {   
 
     return (
-      <div className="task-timer">
+      <div className="task-timer stopwatch">
         {this.state.timerDone ? <h1>Timer Done!</h1> : ""}
+        <i className="far fa-clock"></i> Timer
+
         {this.buildCountdownDisplay()}
         <div className="timer-controls">
           {this.state.timerRunning ? (

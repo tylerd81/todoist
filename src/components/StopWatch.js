@@ -20,6 +20,10 @@ export default class StopWatch extends Component {
     this.setState({timerId: null, timerRunning: false});
   }
 
+  logButtonPressed = () => {
+    this.props.stopwatchDone(this.state.currentTime);
+    this.setState({currentTime: 0});
+  }
   resetTimer = () => {
     this.stopTimer();
     this.setState({currentTime: 0});
@@ -48,6 +52,7 @@ export default class StopWatch extends Component {
       <div className="task-timer">
         {/* <h3>{currentTime}</h3> */}
         {/* <TimeDisplay currentTime={currentTime} editable={true} /> */}
+        <i class="fas fa-stopwatch"></i> Stopwatch
         {this.buildStopwatchDisplay(convertSecondsToTimeObject(currentTime))}
         <div className="timer-controls">
           {!this.state.timerRunning ?
@@ -62,7 +67,7 @@ export default class StopWatch extends Component {
           {
             this.state.timerRunning ? 
             <h5>Press stop when you are done.</h5> :
-            <button className="log-button" onClick={this.stopTimer}>Log This</button>
+            <button className="log-button" onClick={this.logButtonPressed}>Log This</button>
           }
         </div>
       </div>

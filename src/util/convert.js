@@ -1,5 +1,5 @@
 
-export function convertSecondsToTimeObject(seconds) {
+export function convertSecondsToTimeObject(seconds) {  
   if(seconds === 0) {
     return {hours:"00", minutes:"00", seconds: "00"};
   }

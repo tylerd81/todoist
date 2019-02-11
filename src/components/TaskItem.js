@@ -1,83 +1,104 @@
 import React, { Component } from "react";
 import FinishedIcon from "./FinishedIcon";
 import StopWatch from "./StopWatch";
-import Timer from "./Timer";
 import CountdownTimer from "./CountdownTimer";
-
-function convertSecondsToTimeString(seconds) { 
-  if(seconds === 0) {
-    return "no time at all (what's the matter?!) ";
-  }
-  let totalMinutes = Math.floor(seconds / 60);
-  let hours = Math.floor(totalMinutes / 60);
-  let minutes = totalMinutes % 60;
-
-  let s = "";
-  if(hours !== 0) {
-    s += `${hours} ${hours === 1 ? 'Hour' : 'Hours'} `;
-  }
-
-  if(minutes !== 0) {
-    s += `${minutes} ${minutes === 1 ? 'Minutes' : 'Minutes'}`;
-  }
-  return s;
-}
+import { convertSecondsToTimeObject } from "../util/convert";
 
 export default class TaskItem extends Component {
   state = {
     folded: false,
     stopWatchDisplayed: false,
     timerDisplayed: true,
+    timeSpent: 0,
+    completed: false
   };
 
-  toggleItem = () => {
-    this.setState({folded: !this.state.folded});
+  componentDidMount() {
+    this.setState({
+      timeSpent: this.props.task.timeSpent,
+      completed: this.props.completed
+    });
   }
 
-  updateTime = (seconds) => {
-    console.log(`Task worked on for ${seconds} seconds.`);
-  }
+  toggleItem = () => {
+    this.setState({ folded: !this.state.folded });
+  };
+
+  updateTime = seconds => {
+    this.setState({ timeSpent: this.state.timeSpent + seconds });
+  };
 
   showStopWatch = () => {
-    this.setState({stopWatchDisplayed: true, timerDisplayed: false});
-  }
+    this.setState({ stopWatchDisplayed: true, timerDisplayed: false });
+  };
 
   showTimer = () => {
-    this.setState({stopWatchDisplayed: false, timerDisplayed: true});
-  }
+    this.setState({ stopWatchDisplayed: false, timerDisplayed: true });
+  };
 
+  markDoneButtonPressed = () => {
+    this.setState({ completed: !this.state.completed });
+  };
   render() {
-    let { title, completed, timeSpent } = this.props.task;
-    console.log(`${title} ${completed} ${timeSpent}`);
+    let { title } = this.props.task;
+    let timeObj = convertSecondsToTimeObject(this.state.timeSpent);
 
     return (
       <li key={title} className="task-item">
-        <h2 className="task-item-header" onClick={this.toggleItem}>{title}</h2>
+        <h2 className="task-item-header" onClick={this.toggleItem}>
+          {title}
+        </h2>
 
-        {!this.state.folded ? (
-          <div className="task-item-container">
-            
-            <div className="task-item-details">
-              <FinishedIcon finished={completed} />
-              <p>You have spent {convertSecondsToTimeString(timeSpent)} on this task.</p>              
-              <div>
-                <button type="button" className="switch-timer-button" onClick={this.showStopWatch}>Stop Watch</button>
-                <button type="button" className="switch-timer-button" onClick={this.showTimer}>Timer</button>
-
-              </div>
-            </div>
-
-            <div className="timer-container">
-              { this.state.stopWatchDisplayed ? 
-                <StopWatch stopwatchDone={this.updateTime} /> :
-                <CountdownTimer countdownDone={this.updateTime} />
-              } 
-
+        <div className="task-item-container">
+          <div className="task-item-details">
+            <FinishedIcon finished={this.state.completed} />
+            {!this.state.completed ? (
+              <button
+                className="switch-timer-button"
+                type="button"
+                onClick={this.markDoneButtonPressed}
+              >
+                Mark As Complete
+              </button>
+            ) : (
+              <button
+                className="switch-timer-button"
+                type="button"
+                onClick={this.markDoneButtonPressed}
+              >
+                Mark As Unfinished
+              </button>
+            )}
+            <p>
+              You have spent {timeObj.hours} hours, {timeObj.minutes} minutes,
+              and {timeObj.seconds} seconds on this task.
+            </p>
+            <div>
+              <button
+                type="button"
+                className="switch-timer-button"
+                onClick={this.showStopWatch}
+              >
+                Stop Watch
+              </button>
+              <button
+                type="button"
+                className="switch-timer-button"
+                onClick={this.showTimer}
+              >
+                Timer
+              </button>
             </div>
           </div>
-        ) : (
-          <div />
-        )}
+
+          <div className="timer-container">
+            {this.state.stopWatchDisplayed ? (
+              <StopWatch stopwatchDone={this.updateTime} />
+            ) : (
+              <CountdownTimer countdownDone={this.updateTime} />
+            )}
+          </div>
+        </div>
       </li>
     );
   }

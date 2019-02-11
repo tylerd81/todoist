@@ -6,10 +6,14 @@ export default class TaskList extends Component {
     const  {taskList}  = this.props;
     const taskItems = taskList.map(task => <TaskItem task={task} />);
     
-    return (
-      <ul className="task-list">
-        {taskItems}
-      </ul>
-    );
+    if(taskList.length === 0) {
+      return <h2>Add a task.</h2>
+    }else{
+      return (
+        <ul className="task-list">
+          {taskItems}
+        </ul>
+      );
+    }
   }
 }

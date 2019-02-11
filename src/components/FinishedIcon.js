@@ -7,7 +7,7 @@ export default class FinishedIcon extends Component {
     return (
       finished ? 
       <div className="finished-icon"><i className="green-check fas fa-check"></i> Task Complete!</div>:
-      <div className="finished-icon"><i className="red-check fas fa-check"></i> Working on it...</div>);
+      <div className="finished-icon"><i className="red-check far fa-calendar"></i> Working on it...</div>);
 
   }
 }
